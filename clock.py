@@ -1,6 +1,7 @@
 import pygame, led, sys, os, random, csv
 import smbus
 from pygame.locals import *
+from led.PixelEventHandler import *
 
 """ A very simple arcade shooter demo :)
 """
