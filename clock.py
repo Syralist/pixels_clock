@@ -91,7 +91,7 @@ def main():
                 gameover = True
 
             screen.fill(BLACK)
-            font = pygame.font.Font(None, 16)
+            font = pygame.font.SysFont("Arial", 16)
             text1 = font.render("Game over", 0, RED)
             text1pos = text1.get_rect()
             text1pos.midtop = (screen.get_rect().centerx, -1)
