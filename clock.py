@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pygame, led, sys, os, random, csv
 import smbus
 from pygame.locals import *
