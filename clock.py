@@ -42,6 +42,8 @@ def main():
     pygame.font.init()
     clock = pygame.time.Clock()
     pygame.joystick.init()
+
+    gameover = False
     
     # Initialize first joystick
     if pygame.joystick.get_count() > 0:
@@ -54,7 +56,7 @@ def main():
     # Clear event list before starting the game
     pygame.event.clear()
 
-    while True:
+    while not gameover:
 
         # Process event queue
         for pgevent in pygame.event.get():
@@ -92,16 +94,16 @@ def main():
             elif pgevent.type == KEYDOWN and pgevent.key == K_ESCAPE:
                 gameover = True
 
-            screen.fill(BLACK)
-            font = pygame.font.SysFont("Arial", 16)
-            text1 = font.render("Game over", 0, RED)
-            text1pos = text1.get_rect()
-            text1pos.midtop = (screen.get_rect().centerx, -1)
-            screen.blit(text1,text1pos)
-            text2 = font.render("Score: "+str(LM75.read_byte(adress)), 0, GREEN)
-            text2pos = text2.get_rect()
-            text2pos.midbottom = (screen.get_rect().centerx, 21)
-            screen.blit(text2,text2pos)
+        screen.fill(BLACK)
+        font = pygame.font.SysFont("Arial", 16)
+        text1 = font.render("Game over", 0, RED)
+        text1pos = text1.get_rect()
+        text1pos.midtop = (screen.get_rect().centerx, -1)
+        screen.blit(text1,text1pos)
+        text2 = font.render("Score: "+str(LM75.read_byte(adress)), 0, GREEN)
+        text2pos = text2.get_rect()
+        text2pos.midbottom = (screen.get_rect().centerx, 21)
+        screen.blit(text2,text2pos)
 
         simDisplay.update(screen)
         ledDisplay.update(screen)
