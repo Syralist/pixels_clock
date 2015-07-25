@@ -22,12 +22,12 @@ hasSerialPortParameter = ( sys.argv.__len__() > 1 )
 fallbackSize = ( 90, 20 )
 
 if hasSerialPortParameter:
-    serialport = sys.argv[ 1 ]
-    print "INITIALIZING WITH USB-PORT: "+serialport
-    ledDisplay = led.dsclient.DisplayServerClientDisplay(serialport, 8123)
+    serialPort = sys.argv[1]
+    print "INITIALIZING WITH USB-PORT: " + serialPort
+    ledDisplay = led.teensy.TeensyDisplay(serialPort, fallbackSize)
 else:
-    print "INITIALIZING WITH SIMULATOR ONLY."
-    ledDisplay = led.dsclient.DisplayServerClientDisplay("localhost", 8123)
+    print "INITIALIZING WITH SERVER DISPLAY AND SIMULATOR."
+    ledDisplay = led.dsclient.DisplayServerClientDisplay('localhost', 8123, fallbackSize)
 
 # use same size for sim and real LED panel
 size = ledDisplay.size()
@@ -38,6 +38,7 @@ gamestate = 0 #1=alive; 0=dead
 
 def main():
     pygame.init()
+    pygame.font.init()
     clock = pygame.time.Clock()
     pygame.joystick.init()
     
