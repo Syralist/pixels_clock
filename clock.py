@@ -3,7 +3,7 @@ import pygame, led, sys, os, random, csv
 import smbus
 from pygame.locals import *
 from led.PixelEventHandler import *
-from datetime import datetime
+from time import gmtime, strftime
 
 """ A very simple arcade shooter demo :)
 """
@@ -98,7 +98,7 @@ def main():
 
         screen.fill(BLACK)
         font = pygame.font.SysFont("Arial", 12)
-        text1 = font.render(datetime.now().time().isoformat(), 0, RED)
+        text1 = font.render(strftime("%H:%M:%S", gmtime()), 0, RED)
         text1pos = text1.get_rect()
         text1pos.midtop = (screen.get_rect().centerx, -1)
         screen.blit(text1,text1pos)
@@ -106,9 +106,9 @@ def main():
             temp = LM75.read_byte(adress)
         except:
             temp = -1
-        text2 = font.render("T: "+str(temp)+"°C", 0, GREEN)
+        text2 = font.render("T: "+str(temp)+"'C", 0, GREEN)
         text2pos = text2.get_rect()
-        text2pos.midbottom = (screen.get_rect().centerx, 21)
+        text2pos.midbottom = (screen.get_rect().centerx, 23)
         screen.blit(text2,text2pos)
 
         simDisplay.update(screen)
