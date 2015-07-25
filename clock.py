@@ -98,7 +98,7 @@ def main():
 
         screen.fill(BLACK)
         font = pygame.font.SysFont("Arial", 12)
-        text1 = font.render(strftime("%H:%M:%S", gmtime()), 0, RED)
+        text1 = font.render(strftime("%H:%M:%S"), 0, RED)
         text1pos = text1.get_rect()
         text1pos.midtop = (screen.get_rect().centerx, -1)
         screen.blit(text1,text1pos)
