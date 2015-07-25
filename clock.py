@@ -95,12 +95,12 @@ def main():
                 gameover = True
 
         screen.fill(BLACK)
-        font = pygame.font.SysFont("Arial", 16)
-        text1 = font.render("Game over", 0, RED)
-        text1pos = text1.get_rect()
-        text1pos.midtop = (screen.get_rect().centerx, -1)
-        screen.blit(text1,text1pos)
-        text2 = font.render("Score: "+str(LM75.read_byte(adress)), 0, GREEN)
+        font = pygame.font.SysFont("Arial", 12)
+        # text1 = font.render("Game over", 0, RED)
+        # text1pos = text1.get_rect()
+        # text1pos.midtop = (screen.get_rect().centerx, -1)
+        # screen.blit(text1,text1pos)
+        text2 = font.render("Temperatur: "+str(LM75.read_byte(adress)), 0, GREEN)
         text2pos = text2.get_rect()
         text2pos.midbottom = (screen.get_rect().centerx, 21)
         screen.blit(text2,text2pos)
