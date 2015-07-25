@@ -39,45 +39,67 @@ gamestate = 0 #1=alive; 0=dead
 def main():
     pygame.init()
     clock = pygame.time.Clock()
+    pygame.joystick.init()
+    
+    # Initialize first joystick
+    if pygame.joystick.get_count() > 0:
+        stick = pygame.joystick.Joystick(0)
+        stick.init()
     
     global gamestate
 
     scored = False
+    # Clear event list before starting the game
+    pygame.event.clear()
 
     while True:
-        for event in pygame.event.get():
-            if event.type == QUIT:
+
+        # Process event queue
+        for pgevent in pygame.event.get():
+            if pgevent.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
-            elif event.type == KEYDOWN:
-                if event.key == K_UP:
-                    pass
-                elif event.key == K_DOWN:
-                    pass
-                elif event.key == K_LEFT:
-                    pass
-                elif event.key == K_RIGHT:
-                    pass
-                elif event.key == K_SPACE:
-                    if gamestate == 0:
-                        pass
-                        scored = False
+            event = process_event(pgevent)
 
-            elif event.type == KEYUP:
-                if event.key == K_UP or event.key == K_DOWN:
+            # End the game
+            if event.button == EXIT:
+                gameover = True
+
+            # Keypresses on keyboard and joystick axis motions / button presses
+            elif event.type == PUSH:
+                # Movements
+                if event.button == UP:
+                    pass
+                elif event.button == DOWN:
+                    pass
+                elif event.button == RIGHT:
+                    pass
+                elif event.button == LEFT:
                     pass
 
-        screen.fill(BLACK)
-        font = pygame.font.Font(None, 16)
-        text1 = font.render("Game over", 0, RED)
-        text1pos = text1.get_rect()
-        text1pos.midtop = (screen.get_rect().centerx, -1)
-        screen.blit(text1,text1pos)
-        text2 = font.render("Score: "+str(LM75.read_byte(adress)), 0, GREEN)
-        text2pos = text2.get_rect()
-        text2pos.midbottom = (screen.get_rect().centerx, 21)
-        screen.blit(text2,text2pos)
+                # Tower selection
+            elif event.button == B2:
+                pass
+
+                # Tower placement
+            elif event.button == P1:
+                gameover = True
+
+            # Only on Keyboard
+            elif pgevent.type == KEYDOWN and pgevent.key == K_ESCAPE:
+                gameover = True
+
+            screen.fill(BLACK)
+            font = pygame.font.Font(None, 16)
+            text1 = font.render("Game over", 0, RED)
+            text1pos = text1.get_rect()
+            text1pos.midtop = (screen.get_rect().centerx, -1)
+            screen.blit(text1,text1pos)
+            text2 = font.render("Score: "+str(LM75.read_byte(adress)), 0, GREEN)
+            text2pos = text2.get_rect()
+            text2pos.midbottom = (screen.get_rect().centerx, 21)
+            screen.blit(text2,text2pos)
 
         simDisplay.update(screen)
         ledDisplay.update(screen)
